@@ -21,7 +21,7 @@ fun main() {
     fun calculate(typeCard :String = "VK Pay", curentMonthTrasfer: Double = 0.0, amountTransfer : Double): String = when {
         (typeCard == "MasterCard" || typeCard =="Maestro") -> when {
             (amountTransfer < dayCardLimitTransfer && amountTransfer < beforeFee && curentMonthTrasfer < monthCardLimitTransfer &&
-                    (amountTransfer + curentMonthTrasfer) < monthCardLimitTransfer) -> "сумма перевода составит $amountTransfer без комиссии"
+                    (amountTransfer + curentMonthTrasfer) < monthCardLimitTransfer) -> "сумма перевода составит ${amountTransfer/100} без комиссии"
             (amountTransfer < dayCardLimitTransfer && amountTransfer > beforeFee && curentMonthTrasfer < monthCardLimitTransfer &&
                     (amountTransfer + curentMonthTrasfer) < monthCardLimitTransfer) -> "сумма перевода составит - ${(amountTransfer * 1.006 + 2000)/100 }руб, комиссия - " +
                     "${(amountTransfer * 0.06 + 2000)/100} руб"
@@ -38,7 +38,7 @@ fun main() {
         }
         else -> when {
             (amountTransfer < vkPerOnceLimit && curentMonthTrasfer < vkPerMonthLimit && (amountTransfer + curentMonthTrasfer) < vkPerMonthLimit) ->
-                "сумма перевода составит $amountTransfer без комиссии"
+                "сумма перевода составит ${amountTransfer/100} без комиссии"
             else -> "Вы превысили лимиты! Перевод не осуществлён!"
         }
 
